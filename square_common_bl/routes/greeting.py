@@ -32,7 +32,10 @@ async def create_greeting_v0(body: CreateGreetingV0):
     app_id = body.app_id
     greeting_is_anonymous = body.greeting_is_anonymous
     greeting_anonymous_sender_name = body.greeting_anonymous_sender_name
-    user_id = body.user_id
+    if body.user_id:
+        user_id = str(body.user_id)
+    else:
+        user_id = body.user_id
     greeting_text = body.greeting_text
     try:
 
@@ -61,8 +64,8 @@ async def create_greeting_v0(body: CreateGreetingV0):
             data=[
                 {
                     Greeting.app_id.name: app_id,
-                    Greeting.greeting_is_anonymous: greeting_is_anonymous,
-                    Greeting.greeting_anonymous_sender_name: greeting_anonymous_sender_name,
+                    Greeting.greeting_is_anonymous.name: greeting_is_anonymous,
+                    Greeting.greeting_anonymous_sender_name.name: greeting_anonymous_sender_name,
                     Greeting.user_id.name: user_id,
                     Greeting.greeting_text.name: greeting_text,
                 },
@@ -75,7 +78,7 @@ async def create_greeting_v0(body: CreateGreetingV0):
 
         output_content = get_api_output_in_standard_format(
             message=messages["GENERIC_CREATION_SUCCESSFUL"],
-            data={"main": local_list},
+            data={"main": local_list["data"]["main"]},
         )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
