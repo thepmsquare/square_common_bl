@@ -2,6 +2,7 @@ import os
 import sys
 
 from square_commons import ConfigReader
+from square_database_helper import SquareDatabaseHelper
 from square_logger.main import SquareLogger
 
 try:
@@ -62,6 +63,12 @@ try:
         pint_log_level=config_int_log_level,
         pstr_log_path=config_str_log_path,
         pint_log_backup_count=config_int_log_backup_count,
+    )
+    # Initialize SquareDatabaseHelper
+    global_object_square_database_helper = SquareDatabaseHelper(
+        param_str_square_database_ip=config_str_square_database_ip,
+        param_int_square_database_port=config_int_square_database_port,
+        param_str_square_database_protocol=config_str_square_database_protocol,
     )
 except Exception as e:
     print(

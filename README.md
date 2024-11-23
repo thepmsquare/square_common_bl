@@ -16,9 +16,14 @@ pip install square_common_bl
 
 ## changelog
 
+### v1.2.0
+
+- initialize SquareDatabaseHelper in configuration.py.
+- remove app_id from greeting -> create_greeting.
+
 ### v1.1.0
 
-- add utils -> get_app_id_v0
+- add utils -> get_app_id_v0.
 
 ### v1.0.0
 

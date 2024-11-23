@@ -1,28 +1,19 @@
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 from square_commons import get_api_output_in_standard_format
-from square_database_helper.main import SquareDatabaseHelper
-from square_database_helper.pydantic_models import FiltersV0, FilterConditionsV0
+from square_database_helper.pydantic_models import FilterConditionsV0, FiltersV0
 from square_database_structure.square import global_string_database_name
 from square_database_structure.square.public import global_string_schema_name
 from square_database_structure.square.public.tables import App
 
 from square_common_bl.configuration import (
     global_object_square_logger,
-    config_str_square_database_ip,
-    config_int_square_database_port,
-    config_str_square_database_protocol,
+    global_object_square_database_helper,
 )
 from square_common_bl.messages import messages
 
 router = APIRouter(
     tags=["utils"],
-)
-
-global_object_square_database_helper = SquareDatabaseHelper(
-    param_str_square_database_ip=config_str_square_database_ip,
-    param_int_square_database_port=config_int_square_database_port,
-    param_str_square_database_protocol=config_str_square_database_protocol,
 )
 
 
@@ -44,7 +35,9 @@ async def get_app_id_v0(app_name: str):
             schema_name=global_string_schema_name,
             table_name=App.__tablename__,
             columns=[App.app_id.name],
-            filters=FiltersV0({App.app_name.name: FilterConditionsV0(eq=app_name)}),
+            filters=FiltersV0(
+                root={App.app_name.name: FilterConditionsV0(eq=app_name)}
+            ),
         )["data"]["main"]
         if len(local_list) != 1:
             raise HTTPException(
