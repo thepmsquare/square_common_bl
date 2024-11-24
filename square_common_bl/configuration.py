@@ -1,6 +1,7 @@
 import os
 import sys
 
+from square_authentication_helper import SquareAuthenticationHelper
 from square_commons import ConfigReader
 from square_database_helper import SquareDatabaseHelper
 from square_logger.main import SquareLogger
@@ -57,6 +58,21 @@ try:
         ldict_configuration["SQUARE_DATABASE_HELPER"]["SQUARE_DATABASE_PORT"]
     )
     # ===========================================
+    # ===========================================
+    # square_authentication_helper
+
+    config_str_square_authentication_protocol = ldict_configuration[
+        "SQUARE_AUTHENTICATION_HELPER"
+    ]["SQUARE_AUTHENTICATION_PROTOCOL"]
+    config_str_square_authentication_ip = ldict_configuration[
+        "SQUARE_AUTHENTICATION_HELPER"
+    ]["SQUARE_AUTHENTICATION_IP"]
+    config_int_square_authentication_port = int(
+        ldict_configuration["SQUARE_AUTHENTICATION_HELPER"][
+            "SQUARE_AUTHENTICATION_PORT"
+        ]
+    )
+    # ===========================================
     # Initialize logger
     global_object_square_logger = SquareLogger(
         pstr_log_file_name=config_str_log_file_name,
@@ -69,6 +85,11 @@ try:
         param_str_square_database_ip=config_str_square_database_ip,
         param_int_square_database_port=config_int_square_database_port,
         param_str_square_database_protocol=config_str_square_database_protocol,
+    )
+    global_object_square_authentication_helper = SquareAuthenticationHelper(
+        param_str_square_authentication_protocol=config_str_square_authentication_protocol,
+        param_str_square_authentication_ip=config_str_square_authentication_ip,
+        param_int_square_authentication_port=config_int_square_authentication_port,
     )
 except Exception as e:
     print(

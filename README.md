@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v1.3.0
+
+- add square_authentication_helper as dependency.
+- replace user_id with access_token in greeting -> create_greeting.
+
 ### v1.2.0
 
 - initialize SquareDatabaseHelper in configuration.py.
