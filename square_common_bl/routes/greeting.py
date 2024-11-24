@@ -1,5 +1,4 @@
 import json
-from typing import Annotated, Optional
 
 from fastapi import APIRouter, status, HTTPException, Header
 from fastapi.responses import JSONResponse
@@ -25,9 +24,7 @@ router = APIRouter(
 
 @router.post("/create_greeting/v0")
 @global_object_square_logger.async_auto_logger
-async def create_greeting_v0(
-    body: CreateGreetingV0, access_token: Optional[Annotated[str, Header()]] = None
-):
+async def create_greeting_v0(body: CreateGreetingV0, access_token: str = Header(None)):
     greeting_is_anonymous = body.greeting_is_anonymous
     greeting_anonymous_sender_name = body.greeting_anonymous_sender_name
     greeting_text = body.greeting_text
