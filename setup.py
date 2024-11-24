@@ -4,7 +4,7 @@ package_name = "square_common_bl"
 
 setup(
     name=package_name,
-    version="1.3.1",
+    version="1.3.2",
     packages=find_packages(),
     package_data={
         package_name: ["data/*"],

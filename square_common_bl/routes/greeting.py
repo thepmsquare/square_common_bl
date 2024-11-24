@@ -34,7 +34,7 @@ async def create_greeting_v0(body: CreateGreetingV0, access_token: str = Header(
         """
         validation
         """
-        # validate input params combo
+        # validate missing access token
         if not greeting_is_anonymous and access_token is None:
             output_content = get_api_output_in_standard_format(
                 message=messages["GENERIC_400"],
@@ -44,6 +44,7 @@ async def create_greeting_v0(body: CreateGreetingV0, access_token: str = Header(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 content=output_content,
             )
+        # validate access token
         if not greeting_is_anonymous and access_token:
             access_token_payload = global_object_square_authentication_helper.validate_and_get_payload_from_token_v0(
                 token_type=TokenType.access_token, token=access_token
@@ -53,11 +54,20 @@ async def create_greeting_v0(body: CreateGreetingV0, access_token: str = Header(
                 "main"
             ]
             user_id = access_token_payload["user_id"]
-
+        # validate extra params
         if greeting_is_anonymous and access_token is not None:
             output_content = get_api_output_in_standard_format(
                 message=messages["GENERIC_400"],
                 log="extra access_token provided for anonymous greeting.",
+            )
+            return JSONResponse(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                content=output_content,
+            )
+        if not greeting_is_anonymous and greeting_anonymous_sender_name is not None:
+            output_content = get_api_output_in_standard_format(
+                message=messages["GENERIC_400"],
+                log="extra anonymous_sender_name provided for non anonymous greeting.",
             )
             return JSONResponse(
                 status_code=status.HTTP_400_BAD_REQUEST,

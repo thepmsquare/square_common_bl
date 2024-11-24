@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v1.3.2
+
+- validate extra params in greeting -> create_greeting v0.
+
 ### v1.3.1
 
 - accept access_token as header instead of query param in greeting -> create_greeting v0.
