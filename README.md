@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v1.4.0
+
+- add authentication -> logout v0.
+
 ### v1.3.2
 
 - validate extra params in greeting -> create_greeting v0.
