@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v1.5.0
+
+- add authentication -> generate_access_token_v0.
+
 ### v1.4.0
 
 - add authentication -> logout v0.
