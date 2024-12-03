@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v1.7.0
+
+- add authentication -> update_username_v0.
+
 ### v1.6.0
 
 - add authentication -> delete_user_v0.
