@@ -23,7 +23,7 @@ router = APIRouter(
 
 @router.delete("/logout/v0")
 @global_object_square_logger.async_auto_logger
-async def remove_app_for_self_v0(
+async def logout_v0(
     refresh_token: Annotated[str, Header()],
 ):
 

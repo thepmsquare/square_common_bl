@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v1.10.0
+
+- rename remove_app_for_self_v0 to logout_v0.
+
 ### v1.9.0
 
 - add authentication -> get_user_details_v0.
