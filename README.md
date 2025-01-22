@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.0.0
+
+- remove authentication -> logout_v0, generate_access_token_v0.
+
 ### v1.11.0
 
 - set allow_credentials=True.
