@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.1.0
+
+- github actions for CI/CD for testing and auto build and push.
+
 ### v2.0.0
 
 - remove authentication -> logout_v0, generate_access_token_v0.
