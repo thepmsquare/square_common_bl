@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.3.0
+
+- add authentication -> logout_apps_v0.
+
 ### v2.2.0
 
 - add authentication -> logout_all_v0.
