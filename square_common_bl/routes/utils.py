@@ -61,6 +61,7 @@ async def get_app_id_v0(app_name: str):
             content=output_content,
         )
     except HTTPException as http_exception:
+        global_object_square_logger.logger.error(http_exception, exc_info=True)
         return JSONResponse(
             status_code=http_exception.status_code, content=http_exception.detail
         )
