@@ -4,7 +4,7 @@ package_name = "square_common_bl"
 
 setup(
     name=package_name,
-    version="2.3.1",
+    version="2.4.0",
     packages=find_packages(),
     package_data={
         package_name: ["data/*"],
@@ -14,6 +14,7 @@ setup(
         "fastapi>=0.104.1",
         "pydantic>=2.5.3",
         "requests>=2.32.3",
+        "pytest>=8.0.0",
         "square_commons>=1.0.0",
         "square_logger>=1.0.0",
         "square_database_helper>=2.0.0",

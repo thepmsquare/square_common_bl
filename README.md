@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.4.0
+
+- add pytest as dependency.
+- add dummy test case.
+
 ### v2.3.1
 
 - add error logs in all endpoints.
