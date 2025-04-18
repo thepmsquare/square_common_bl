@@ -23,7 +23,7 @@ router = APIRouter(
 
 
 @router.post("/create_greeting/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def create_greeting_v0(body: CreateGreetingV0, access_token: str = Header(None)):
     greeting_is_anonymous = body.greeting_is_anonymous
     greeting_anonymous_sender_name = body.greeting_anonymous_sender_name

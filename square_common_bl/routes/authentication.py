@@ -29,7 +29,7 @@ router = APIRouter(
 
 
 @router.delete("/delete_user/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def delete_user_v0(
     body: DeleteUserV0,
     access_token: Annotated[str, Header()],
@@ -90,7 +90,7 @@ async def delete_user_v0(
 
 
 @router.patch("/update_username/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def update_username_v0(
     new_username: str,
     access_token: Annotated[str, Header()],
@@ -151,7 +151,7 @@ async def update_username_v0(
 
 
 @router.patch("/update_password/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def update_password_v0(
     body: UpdatePasswordV0,
     access_token: Annotated[str, Header()],
@@ -214,7 +214,7 @@ async def update_password_v0(
 
 
 @router.get("/get_user_details/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def get_user_details_v0(
     access_token: Annotated[str, Header()],
 ):
@@ -273,7 +273,7 @@ async def get_user_details_v0(
 
 
 @router.delete("/logout/all/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def logout_all_v0(
     access_token: Annotated[str, Header()],
 ):
@@ -332,7 +332,7 @@ async def logout_all_v0(
 
 
 @router.delete("/logout/apps/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def logout_apps_v0(
     access_token: Annotated[str, Header()],
     body: LogoutAppsV0,

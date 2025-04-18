@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.4.1
+
+- bump square_logger to 2.0.0.
+
 ### v2.4.0
 
 - add pytest as dependency.

@@ -18,7 +18,7 @@ router = APIRouter(
 
 
 @router.get("/get_app_id/v0")
-@global_object_square_logger.async_auto_logger
+@global_object_square_logger.auto_logger()
 async def get_app_id_v0(app_name: str):
     try:
 
