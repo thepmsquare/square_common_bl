@@ -4,6 +4,7 @@ import sys
 from square_authentication_helper import SquareAuthenticationHelper
 from square_commons import ConfigReader
 from square_database_helper import SquareDatabaseHelper
+from square_file_store_helper import SquareFileStoreHelper
 from square_logger.main import SquareLogger
 
 try:
@@ -73,6 +74,19 @@ try:
         ]
     )
     # ===========================================
+    # ===========================================
+    # square_file_store_helper
+
+    config_str_square_file_store_protocol = ldict_configuration[
+        "SQUARE_FILE_STORE_HELPER"
+    ]["SQUARE_FILE_STORE_PROTOCOL"]
+    config_str_square_file_store_ip = ldict_configuration["SQUARE_FILE_STORE_HELPER"][
+        "SQUARE_FILE_STORE_IP"
+    ]
+    config_int_square_file_store_port = int(
+        ldict_configuration["SQUARE_FILE_STORE_HELPER"]["SQUARE_FILE_STORE_PORT"]
+    )
+    # ===========================================
     # Initialize logger
     global_object_square_logger = SquareLogger(
         pstr_log_file_name=config_str_log_file_name,
@@ -91,6 +105,13 @@ try:
         param_str_square_authentication_ip=config_str_square_authentication_ip,
         param_int_square_authentication_port=config_int_square_authentication_port,
     )
+    global_object_square_file_store_helper = SquareFileStoreHelper(
+        param_str_square_file_store_protocol=config_str_square_file_store_protocol,
+        param_str_square_file_store_ip=config_str_square_file_store_ip,
+        param_int_square_file_store_port=config_int_square_file_store_port,
+    )
+
+
 except Exception as e:
     print(
         "\033[91mMissing or incorrect config.ini file.\n"

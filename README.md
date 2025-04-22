@@ -16,6 +16,16 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.5.0
+
+- new dependency square_file_store_helper.
+- config
+    - add new section SQUARE_FILE_STORE_HELPER.
+- update gitignore to add temp folder.
+- authentication
+    - add cleanup_task.
+    - add get_user_profile_photo_v0.
+
 ### v2.4.1
 
 - bump square_logger to 2.0.0.

@@ -1,8 +1,10 @@
 import json
+import shutil
 from typing import Annotated
 
 from fastapi import APIRouter, Header, HTTPException, status
-from fastapi.responses import JSONResponse
+from fastapi.background import BackgroundTasks
+from fastapi.responses import JSONResponse, FileResponse, Response
 from requests import HTTPError
 from square_commons import get_api_output_in_standard_format
 from square_database_helper import FiltersV0
@@ -15,6 +17,7 @@ from square_common_bl.configuration import (
     global_object_square_logger,
     global_object_square_authentication_helper,
     global_object_square_database_helper,
+    global_object_square_file_store_helper,
 )
 from square_common_bl.messages import messages
 from square_common_bl.pydantic_models.authentication import (
@@ -26,6 +29,10 @@ from square_common_bl.pydantic_models.authentication import (
 router = APIRouter(
     tags=["authentication"],
 )
+
+
+def cleanup_task():
+    shutil.rmtree("temp", True)
 
 
 @router.delete("/delete_user/v0")
@@ -263,6 +270,81 @@ async def get_user_details_v0(
         rollback logic
         """
         # pass
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"],
+            log=str(e),
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@router.get("/get_user_profile_photo/v0")
+@global_object_square_logger.auto_logger()
+async def get_user_profile_photo_v0(
+    access_token: Annotated[str, Header()],
+):
+
+    try:
+
+        """
+        validation
+        """
+        # pass
+        """
+        main process
+        """
+        response = global_object_square_authentication_helper.get_user_details_v0(
+            access_token=access_token,
+        )
+        # not revalidating access token here
+        user_profile_photo_storage_token = response["data"]["main"]["profile"][
+            "user_profile_photo_storage_token"
+        ]
+        if not user_profile_photo_storage_token:
+            return Response(status_code=status.HTTP_204_NO_CONTENT)
+        profile_photo_path = global_object_square_file_store_helper.download_file_v0(
+            file_storage_token=user_profile_photo_storage_token,
+            output_folder_path="temp",
+        )
+        """
+        return value
+        """
+        bg_tasks = BackgroundTasks()
+        bg_tasks.add_task(cleanup_task)
+        return FileResponse(
+            status_code=status.HTTP_200_OK,
+            path=profile_photo_path,
+            background=bg_tasks,
+        )
+    except HTTPError as http_error:
+        global_object_square_logger.logger.error(http_error, exc_info=True)
+        """
+        rollback logic
+        """
+        # pass
+        cleanup_task()
+        return JSONResponse(
+            status_code=http_error.response.status_code,
+            content=json.loads(http_error.response.content),
+        )
+    except HTTPException as http_exception:
+        global_object_square_logger.logger.error(http_exception, exc_info=True)
+        """
+        rollback logic
+        """
+        # pass
+        cleanup_task()
+        return JSONResponse(
+            status_code=http_exception.status_code, content=http_exception.detail
+        )
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
+        """
+        rollback logic
+        """
+        # pass
+        cleanup_task()
         output_content = get_api_output_in_standard_format(
             message=messages["GENERIC_500"],
             log=str(e),
