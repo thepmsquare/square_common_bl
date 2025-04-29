@@ -16,6 +16,12 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.6.0
+
+- bump square_file_store_helper>=3.0.0.
+- authentication
+    - add update_profile_photo_v0.
+
 ### v2.5.0
 
 - new dependency square_file_store_helper.
