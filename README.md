@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.6.1
+
+- add python multipart as dependency.
+
 ### v2.6.0
 
 - bump square_file_store_helper>=3.0.0.
