@@ -1,6 +1,6 @@
 import json
 import shutil
-from typing import Annotated
+from typing import Annotated, Optional
 
 from fastapi import APIRouter, Header, HTTPException, status, UploadFile
 from fastapi.background import BackgroundTasks
@@ -358,7 +358,7 @@ async def get_user_profile_photo_v0(
 @global_object_square_logger.auto_logger()
 async def update_profile_photo_v0(
     access_token: Annotated[str, Header()],
-    profile_photo: UploadFile,
+    profile_photo: Optional[UploadFile] = None,
 ):
 
     try:
@@ -370,15 +370,24 @@ async def update_profile_photo_v0(
         """
         main process
         """
-
-        response = global_object_square_authentication_helper.update_profile_photo_v0(
-            access_token=access_token,
-            profile_photo=(
-                profile_photo.filename,
-                profile_photo.file,
-                profile_photo.content_type,
-            ),
-        )
+        if profile_photo:
+            response = (
+                global_object_square_authentication_helper.update_profile_photo_v0(
+                    access_token=access_token,
+                    profile_photo=(
+                        profile_photo.filename,
+                        profile_photo.file,
+                        profile_photo.content_type,
+                    ),
+                )
+            )
+        else:
+            response = (
+                global_object_square_authentication_helper.update_profile_photo_v0(
+                    access_token=access_token,
+                    profile_photo=None,
+                )
+            )
 
         """
         return value

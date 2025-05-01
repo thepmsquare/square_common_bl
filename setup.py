@@ -4,7 +4,7 @@ package_name = "square_common_bl"
 
 setup(
     name=package_name,
-    version="2.6.1",
+    version="2.6.2",
     packages=find_packages(),
     package_data={
         package_name: ["data/*"],
@@ -20,7 +20,7 @@ setup(
         "square_logger>=2.0.0",
         "square_database_helper>=2.0.0",
         "square_database_structure>=1.0.0",
-        "square_authentication_helper>=2.2.0",
+        "square_authentication_helper>=2.4.1",
         "square_file_store_helper>=3.0.0",
         "python-multipart>=0.0.16",
     ],
