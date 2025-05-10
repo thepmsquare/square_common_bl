@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.6.3
+
+- mock ini file for pytest.
+
 ### v2.6.2
 
 - make profile_photo optional in update_profile_photo_v0.
