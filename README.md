@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.6.4
+
+- env
+    - add ALLOW_ORIGINS
+
 ### v2.6.3
 
 - mock ini file for pytest.
