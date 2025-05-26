@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.6.5
+
+- remove config.ini and config.testing.ini from version control.
+
 ### v2.6.4
 
 - env
