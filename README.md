@@ -16,6 +16,10 @@ pip install square_common_bl
 
 ## changelog
 
+### v2.7.0 (in progress)
+
+- update parameters for update_password_v0.
+
 ### v2.6.5
 
 - remove config.ini and config.testing.ini from version control.

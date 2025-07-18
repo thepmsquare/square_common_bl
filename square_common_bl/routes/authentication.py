@@ -165,6 +165,8 @@ async def update_password_v0(
 ):
     old_password = body.old_password
     new_password = body.new_password
+    logout_other_sessions = body.logout_other_sessions
+    preserve_session_refresh_token = body.preserve_session_refresh_token
     try:
         """
         validation
@@ -177,6 +179,8 @@ async def update_password_v0(
             old_password=old_password,
             new_password=new_password,
             access_token=access_token,
+            logout_other_sessions=logout_other_sessions,
+            preserve_session_refresh_token=preserve_session_refresh_token,
         )
         """
         return value
