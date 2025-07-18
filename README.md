@@ -18,7 +18,9 @@ pip install square_common_bl
 
 ### v2.7.0 (in progress)
 
-- update parameters for update_password_v0.
+- authentication
+    - update parameters for update_password_v0.
+    - add validate_email_verification_code_v0.
 
 ### v2.6.5
 

@@ -16,3 +16,7 @@ class UpdatePasswordV0(BaseModel):
 
 class LogoutAppsV0(BaseModel):
     app_names: List[str]
+
+
+class ValidateEmailVerificationCodeV0(BaseModel):
+    verification_code: str
