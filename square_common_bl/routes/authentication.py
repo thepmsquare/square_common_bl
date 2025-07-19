@@ -37,11 +37,11 @@ def cleanup_task():
     shutil.rmtree("temp", True)
 
 
-@router.delete("/delete_user/v0")
+@router.post("/delete_user/v0")
 @global_object_square_logger.auto_logger()
 async def delete_user_v0(
-    body: DeleteUserV0,
     access_token: Annotated[str, Header()],
+    body: DeleteUserV0,
 ):
 
     try:

@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v3.0.0
+
+- authentication
+    - **breaking change**: delete_user_v0 is now POST instead of DELETE.
+
 ### v2.7.0
 
 - authentication
