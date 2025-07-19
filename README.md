@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v3.1.1
+
+- dependencies
+    - square_authentication_helper>=2.5.1.
+
 ### v3.1.0
 
 - authentication
