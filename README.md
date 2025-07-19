@@ -16,7 +16,7 @@ pip install square_common_bl
 
 ## changelog
 
-### v2.7.0 (in progress)
+### v2.7.0
 
 - authentication
     - update parameters for update_password_v0.
@@ -24,6 +24,7 @@ pip install square_common_bl
     - add send_verification_email_v0.
     - add update_profile_details_v0.
     - add send_reset_password_email_v0.
+    - add generate_account_backup_codes_v0.
 
 ### v2.6.5
 
