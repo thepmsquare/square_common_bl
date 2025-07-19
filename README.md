@@ -23,6 +23,7 @@ pip install square_common_bl
     - add validate_email_verification_code_v0.
     - add send_verification_email_v0.
     - add update_profile_details_v0.
+    - add send_reset_password_email_v0.
 
 ### v2.6.5
 

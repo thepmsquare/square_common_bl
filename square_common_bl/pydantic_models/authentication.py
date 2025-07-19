@@ -20,3 +20,7 @@ class LogoutAppsV0(BaseModel):
 
 class ValidateEmailVerificationCodeV0(BaseModel):
     verification_code: str
+
+
+class SendResetPasswordEmailV0(BaseModel):
+    username: str
