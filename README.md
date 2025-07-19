@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v3.1.0
+
+- authentication
+    - update_user_recovery_methods_v0.
+
 ### v3.0.0
 
 - authentication
