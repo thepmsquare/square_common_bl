@@ -16,6 +16,13 @@ pip install square_common_bl
 
 ## changelog
 
+### v3.1.2
+
+- authentication
+    - update_user_recovery_methods_v0 make parameters optional.
+- dependencies
+    - square_authentication_helper>=2.5.2.
+
 ### v3.1.1
 
 - dependencies
@@ -24,7 +31,7 @@ pip install square_common_bl
 ### v3.1.0
 
 - authentication
-    - update_user_recovery_methods_v0.
+    - add new endpoint update_user_recovery_methods_v0.
 
 ### v3.0.0
 

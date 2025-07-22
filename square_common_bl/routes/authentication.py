@@ -891,10 +891,13 @@ async def generate_account_backup_codes_v0(
 @global_object_square_logger.auto_logger()
 async def update_user_recovery_methods_v0(
     access_token: Annotated[str, Header()],
-    recovery_methods_to_add: List[RecoveryMethodEnum],
-    recovery_methods_to_remove: List[RecoveryMethodEnum],
+    recovery_methods_to_add: List[RecoveryMethodEnum] = None,
+    recovery_methods_to_remove: List[RecoveryMethodEnum] = None,
 ):
-
+    if not recovery_methods_to_add:
+        recovery_methods_to_add = []
+    if not recovery_methods_to_remove:
+        recovery_methods_to_remove = []
     try:
         """
         validation
