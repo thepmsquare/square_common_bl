@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v4.0.0
+
+- authentication
+    - **breaking change**: remove update_password_v0.
+
 ### v3.1.2
 
 - authentication
