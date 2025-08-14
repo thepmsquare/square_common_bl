@@ -16,6 +16,11 @@ pip install square_common_bl
 
 ## changelog
 
+### v5.0.0
+
+- greeting
+    - **breaking change**: replace create_greeting_v0 with create_anonymous_greeting_v0.
+
 ### v4.0.0
 
 - authentication

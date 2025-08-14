@@ -1,9 +1,8 @@
 import json
 
-from fastapi import APIRouter, status, HTTPException, Header
+from fastapi import APIRouter, status, HTTPException
 from fastapi.responses import JSONResponse
 from requests import HTTPError
-from square_authentication_helper import TokenType
 from square_commons import get_api_output_in_standard_format
 from square_database_structure.square import global_string_database_name
 from square_database_structure.square.greeting import global_string_schema_name
@@ -12,67 +11,29 @@ from square_database_structure.square.greeting.tables import Greeting
 from square_common_bl.configuration import (
     global_object_square_logger,
     global_object_square_database_helper,
-    global_object_square_authentication_helper,
 )
 from square_common_bl.messages import messages
-from square_common_bl.pydantic_models.greeting import CreateGreetingV0
+from square_common_bl.pydantic_models.greeting import (
+    CreateAnonymousGreetingV0,
+)
 
 router = APIRouter(
     tags=["greeting"],
 )
 
 
-@router.post("/create_greeting/v0")
+@router.post("/create_anonymous_greeting/v0")
 @global_object_square_logger.auto_logger()
-async def create_greeting_v0(body: CreateGreetingV0, access_token: str = Header(None)):
-    greeting_is_anonymous = body.greeting_is_anonymous
+async def create_anonymous_greeting_v0(body: CreateAnonymousGreetingV0):
     greeting_anonymous_sender_name = body.greeting_anonymous_sender_name
     greeting_text = body.greeting_text
-    user_id = None
+
     try:
 
         """
         validation
         """
-        # validate missing access token
-        if not greeting_is_anonymous and access_token is None:
-            output_content = get_api_output_in_standard_format(
-                message=messages["GENERIC_400"],
-                log="provide access_token for non-anonymous greetings.",
-            )
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content=output_content,
-            )
-        # validate access token
-        if not greeting_is_anonymous and access_token:
-            access_token_payload = global_object_square_authentication_helper.validate_and_get_payload_from_token_v0(
-                token_type=TokenType.access_token, token=access_token
-            )[
-                "data"
-            ][
-                "main"
-            ]
-            user_id = access_token_payload["user_id"]
-        # validate extra params
-        if greeting_is_anonymous and access_token is not None:
-            output_content = get_api_output_in_standard_format(
-                message=messages["GENERIC_400"],
-                log="extra access_token provided for anonymous greeting.",
-            )
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content=output_content,
-            )
-        if not greeting_is_anonymous and greeting_anonymous_sender_name is not None:
-            output_content = get_api_output_in_standard_format(
-                message=messages["GENERIC_400"],
-                log="extra anonymous_sender_name provided for non anonymous greeting.",
-            )
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content=output_content,
-            )
+        # pass
         """
         main process
         """
@@ -83,9 +44,8 @@ async def create_greeting_v0(body: CreateGreetingV0, access_token: str = Header(
             table_name=Greeting.__tablename__,
             data=[
                 {
-                    Greeting.greeting_is_anonymous.name: greeting_is_anonymous,
+                    Greeting.greeting_is_anonymous.name: True,
                     Greeting.greeting_anonymous_sender_name.name: greeting_anonymous_sender_name,
-                    Greeting.user_id.name: user_id,
                     Greeting.greeting_text.name: greeting_text,
                 },
             ],
