@@ -8,7 +8,12 @@ common business layer for my personal server.
 
 ## goals
 
-(wip)
+- integration with square_*
+- unified common api across all projects
+- shared business logic
+- security-first design
+- simple and adequate
+- future audit readiness
 
 ## installation
 
