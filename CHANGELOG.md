@@ -1,5 +1,9 @@
 # changelog
 
+## v5.0.2 (in progress)
+
+- move application logic from routes to util_functions.
+
 ## v5.0.1
 
 - docs
