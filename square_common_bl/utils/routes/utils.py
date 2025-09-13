@@ -14,7 +14,7 @@ from square_common_bl.messages import messages
 
 
 @global_object_square_logger.auto_logger()
-async def util_get_app_id_v0(app_name: str):
+def util_get_app_id_v0(app_name: str):
     try:
 
         """

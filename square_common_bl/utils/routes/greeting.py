@@ -19,7 +19,7 @@ from square_common_bl.pydantic_models.greeting import (
 
 
 @global_object_square_logger.auto_logger()
-async def util_create_anonymous_greeting_v0(body: CreateAnonymousGreetingV0):
+def util_create_anonymous_greeting_v0(body: CreateAnonymousGreetingV0):
     greeting_anonymous_sender_name = body.greeting_anonymous_sender_name
     greeting_text = body.greeting_text
 

@@ -1,6 +1,10 @@
 # changelog
 
-## v5.0.2
+## v5.0.3
+
+- bugfix: remove async keyword from all util_functions.
+
+## v5.0.2 (unstable)
 
 - move application logic from routes to util_functions.
 
