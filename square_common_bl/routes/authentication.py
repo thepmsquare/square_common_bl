@@ -28,6 +28,7 @@ from square_common_bl.utils.routes.authentication import (
     util_send_reset_password_email_v0,
     util_generate_account_backup_codes_v0,
     util_update_user_recovery_methods_v0,
+    util_logout_apps_v0,
 )
 
 router = APIRouter(
@@ -181,7 +182,7 @@ async def logout_apps_v0(
 ):
 
     try:
-        return logout_apps_v0(
+        return util_logout_apps_v0(
             access_token=access_token,
             body=body,
         )

@@ -1,6 +1,10 @@
 # changelog
 
-## v5.0.3
+## v5.0.4
+
+- bugfix: return function in logout_apps_v0.
+
+## v5.0.3 (unstable)
 
 - bugfix: remove async keyword from all util_functions.
 
