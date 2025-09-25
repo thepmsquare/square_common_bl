@@ -1,5 +1,12 @@
 # changelog
 
+## v5.0.5
+
+- env
+    - SQUARE_LOGGER -> FORMATTER_CHOICE + ENABLE_REDACTION
+- dependencies
+    - square_logger>=3.0.0.
+
 ## v5.0.4
 
 - bugfix: return function in logout_apps_v0.
