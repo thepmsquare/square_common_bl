@@ -40,27 +40,34 @@ jobs:
             echo "IS_LATEST=${{ github.event.inputs.is_latest }}" >> $GITHUB_ENV
           fi
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.3.0
+
+      - # Add support for more platforms with QEMU (optional)
+        # https://github.com/docker/setup-qemu-action
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME  }}
           password: ${{ secrets.DOCKERHUB_TOKEN  }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.3.0
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
       - name: Build Docker image
         run: |
-          docker buildx build --platform linux/arm64/v8 \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):${{ env.RELEASE_TAG }} \
-            --push .
+          docker build --platform linux/arm64/v8 \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):${{ env.RELEASE_TAG }} .
 
       - name: Tag Docker image as latest (if required)
         if: ${{ env.IS_LATEST == 'true' }}
         run: |
-          docker buildx imagetools create \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):latest \
-            ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):${{ env.RELEASE_TAG }}
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):${{ env.RELEASE_TAG }} ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):latest
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):${{ env.RELEASE_TAG }}
+          # Push latest tag if necessary
+          if [ "${{ env.IS_LATEST }}" == "true" ]; then
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/$(basename ${{ github.repository }}):latest
+          fi
