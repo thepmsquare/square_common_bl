@@ -1,5 +1,10 @@
 # changelog
 
+## v5.0.7
+
+- dependencies
+    - create all and dev sections for pytest dependencies.
+
 ## v5.0.6
 
 - remove setup.py and switch to pyproject.toml
