@@ -6,10 +6,10 @@ from square_common_bl.configuration import (
     global_object_square_logger,
 )
 from square_common_bl.messages import messages
-from square_common_bl.utils.routes.utils import util_get_app_id_v0
+from square_common_bl.utils.routes.internal import util_get_app_id_v0
 
 router = APIRouter(
-    tags=["utils"],
+    tags=["internal"],
 )
 
 

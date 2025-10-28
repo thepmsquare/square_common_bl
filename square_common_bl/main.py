@@ -15,7 +15,7 @@ from square_common_bl.configuration import (
     config_str_ssl_crt_file_path,
     config_list_allow_origins,
 )
-from square_common_bl.routes import greeting, utils, authentication
+from square_common_bl.routes import greeting, internal, authentication
 
 app = FastAPI()
 
@@ -28,7 +28,7 @@ app.add_middleware(
 )
 
 app.include_router(greeting.router)
-app.include_router(utils.router)
+app.include_router(internal.router)
 app.include_router(authentication.router)
 
 
