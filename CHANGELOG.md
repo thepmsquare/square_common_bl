@@ -1,5 +1,10 @@
 # changelog
 
+## v5.0.10
+
+- dependencies
+    - square_authentication_helper >= 3.0.5.
+
 ## v5.0.9
 
 - rename utils router to be internal.

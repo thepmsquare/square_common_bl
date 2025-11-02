@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "square_common_bl"
-version = "5.0.9"
+version = "5.0.10"
 description = "common business layer for my personal server."
 readme = "README.md"
 readme-content-type = "text/markdown"
@@ -25,7 +25,7 @@ dependencies = [
     "square_logger>=3.0.0",
     "square_database_helper>=2.0.0",
     "square_database_structure>=1.0.0",
-    "square_authentication_helper>=2.5.2",
+    "square_authentication_helper>=3.0.5",
     "square_file_store_helper>=3.0.0",
     "python-multipart>=0.0.16",
 ]
