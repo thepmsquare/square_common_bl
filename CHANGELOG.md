@@ -1,5 +1,10 @@
 # changelog
 
+## v5.1.0
+
+- authentication
+    - add get_user_recovery_methods_v0.
+
 ## v5.0.10
 
 - dependencies

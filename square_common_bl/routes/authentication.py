@@ -29,6 +29,7 @@ from square_common_bl.utils.routes.authentication import (
     util_generate_account_backup_codes_v0,
     util_update_user_recovery_methods_v0,
     util_logout_apps_v0,
+    util_get_user_recovery_methods_v0,
 )
 
 router = APIRouter(
@@ -335,6 +336,29 @@ async def update_user_recovery_methods_v0(
             access_token=access_token,
             recovery_methods_to_add=recovery_methods_to_add,
             recovery_methods_to_remove=recovery_methods_to_remove,
+        )
+    except HTTPException as he:
+        global_object_square_logger.logger.error(he, exc_info=True)
+        return JSONResponse(status_code=he.status_code, content=he.detail)
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"], log=str(e)
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@router.get("/get_user_recovery_methods/v0")
+@global_object_square_logger.auto_logger()
+async def get_user_recovery_methods_v0(
+    username: str,
+):
+
+    try:
+        return util_get_user_recovery_methods_v0(
+            username=username,
         )
     except HTTPException as he:
         global_object_square_logger.logger.error(he, exc_info=True)
