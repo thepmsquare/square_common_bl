@@ -1,6 +1,6 @@
 from typing import Annotated, Optional, List
 
-from fastapi import APIRouter, Header, HTTPException, status, UploadFile
+from fastapi import APIRouter, Header, HTTPException, status, UploadFile, Query
 from fastapi.responses import JSONResponse
 from square_commons import get_api_output_in_standard_format
 from square_database_structure.square.authentication.enums import RecoveryMethodEnum
@@ -327,8 +327,8 @@ async def generate_account_backup_codes_v0(
 @global_object_square_logger.auto_logger()
 async def update_user_recovery_methods_v0(
     access_token: Annotated[str, Header()],
-    recovery_methods_to_add: List[RecoveryMethodEnum] = None,
-    recovery_methods_to_remove: List[RecoveryMethodEnum] = None,
+    recovery_methods_to_add: List[RecoveryMethodEnum] = Query(None),
+    recovery_methods_to_remove: List[RecoveryMethodEnum] = Query(None),
 ):
 
     try:

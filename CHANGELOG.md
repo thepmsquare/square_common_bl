@@ -1,5 +1,10 @@
 # changelog
 
+## v5.1.1
+
+- authentication
+    - bugfix in update_user_recovery_methods_v0 default parameters.
+
 ## v5.1.0
 
 - authentication
