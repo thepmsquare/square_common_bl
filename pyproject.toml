@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "square_common_bl"
-version = "5.1.1"
+version = "6.0.0"
 description = "common business layer for my personal server."
 readme = "README.md"
 readme-content-type = "text/markdown"
@@ -28,6 +28,7 @@ dependencies = [
     "square_authentication_helper>=3.1.0",
     "square_file_store_helper>=3.0.0",
     "python-multipart>=0.0.16",
+    "black>=25.11.0",
 ]
 optional-dependencies = { all = ["pytest>=8.3.3"], dev = ["pytest>=8.3.3"] }
 classifiers = [
