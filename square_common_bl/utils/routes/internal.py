@@ -33,7 +33,8 @@ def util_get_app_id_v0(app_name: str):
             filters=FiltersV0(
                 root={App.app_name.name: FilterConditionsV0(eq=app_name)}
             ),
-        )["data"]["main"]
+            response_as_pydantic=True,
+        ).data.main
         if len(local_list) != 1:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,

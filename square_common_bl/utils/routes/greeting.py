@@ -44,6 +44,7 @@ def util_create_anonymous_greeting_v0(body: CreateAnonymousGreetingV0):
                     Greeting.greeting_text.name: greeting_text,
                 },
             ],
+            response_as_pydantic=True,
         )
 
         """
@@ -52,7 +53,7 @@ def util_create_anonymous_greeting_v0(body: CreateAnonymousGreetingV0):
 
         output_content = get_api_output_in_standard_format(
             message=messages["GENERIC_CREATION_SUCCESSFUL"],
-            data={"main": local_list["data"]["main"]},
+            data={"main": local_list.data.main},
         )
         return JSONResponse(
             status_code=status.HTTP_200_OK,

@@ -438,7 +438,8 @@ def util_logout_apps_v0(
                     App.app_name.name: FilterConditionsV0(in_=unique_app_names),
                 }
             ),
-        )["data"]["main"]
+            response_as_pydantic=True,
+        ).data.main
         if not len(local_list_all_apps) == len(unique_app_names):
             output_content = get_api_output_in_standard_format(
                 message=messages["GENERIC_400"],
