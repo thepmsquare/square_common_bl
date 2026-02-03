@@ -8,6 +8,8 @@
 - routes
     - add output format validation in the following in authentication:
         - delete_user_v0.
+- dependencies
+    - update "square_commons>=3.1.0"
 
 ## v6.0.2
 
