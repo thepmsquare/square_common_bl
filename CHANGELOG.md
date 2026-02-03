@@ -1,5 +1,14 @@
 # changelog
 
+## v6.1.0 (in progress)
+
+- models
+    - add the following in authentication:
+        - DeleteUserV0Response.
+- routes
+    - add output format validation in the following in authentication:
+        - delete_user_v0.
+
 ## v6.0.2
 
 - set response_as_pydantic True for all square_authentication_helper utils instead of dict, for better typehints.

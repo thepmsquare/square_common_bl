@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, TypeAlias
 
 from pydantic import BaseModel
+from square_commons.api_utils import StandardResponse
 from square_database_structure.square.authentication.enums import RecoveryMethodEnum
 
 
@@ -23,3 +24,6 @@ class SendResetPasswordEmailV0(BaseModel):
 class UpdateUserRecoveryMethodsV0(BaseModel):
     recovery_methods_to_add: List[RecoveryMethodEnum] = None
     recovery_methods_to_remove: List[RecoveryMethodEnum] = None
+
+
+DeleteUserV0Response: TypeAlias = StandardResponse[None]

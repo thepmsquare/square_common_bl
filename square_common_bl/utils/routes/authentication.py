@@ -6,14 +6,6 @@ from fastapi import Header, HTTPException, status, UploadFile
 from fastapi.background import BackgroundTasks
 from fastapi.responses import JSONResponse, FileResponse, Response
 from requests import HTTPError
-from square_commons import get_api_output_in_standard_format
-from square_database_helper import FiltersV0
-from square_database_helper.pydantic_models import FilterConditionsV0
-from square_database_structure.square import global_string_database_name
-from square_database_structure.square.authentication.enums import RecoveryMethodEnum
-from square_database_structure.square.public import global_string_schema_name
-from square_database_structure.square.public.tables import App
-
 from square_common_bl.configuration import (
     global_object_square_logger,
     global_object_square_authentication_helper,
@@ -26,7 +18,15 @@ from square_common_bl.pydantic_models.authentication import (
     LogoutAppsV0,
     ValidateEmailVerificationCodeV0,
     SendResetPasswordEmailV0,
+    DeleteUserV0Response,
 )
+from square_commons import get_api_output_in_standard_format
+from square_database_helper import FiltersV0
+from square_database_helper.pydantic_models import FilterConditionsV0
+from square_database_structure.square import global_string_database_name
+from square_database_structure.square.authentication.enums import RecoveryMethodEnum
+from square_database_structure.square.public import global_string_schema_name
+from square_database_structure.square.public.tables import App
 
 
 def cleanup_task():
@@ -53,10 +53,10 @@ def util_delete_user_v0(
         """
         return value
         """
-
+        modified_response = DeleteUserV0Response(**response)
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response.model_dump(),
+            content=modified_response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)

@@ -2,8 +2,6 @@ from typing import Annotated, Optional
 
 from fastapi import APIRouter, Header, HTTPException, status, UploadFile
 from fastapi.responses import JSONResponse
-from square_commons import get_api_output_in_standard_format
-
 from square_common_bl.configuration import (
     global_object_square_logger,
 )
@@ -14,6 +12,7 @@ from square_common_bl.pydantic_models.authentication import (
     ValidateEmailVerificationCodeV0,
     SendResetPasswordEmailV0,
     UpdateUserRecoveryMethodsV0,
+    DeleteUserV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -31,13 +30,18 @@ from square_common_bl.utils.routes.authentication import (
     util_logout_apps_v0,
     util_get_user_recovery_methods_v0,
 )
+from square_commons import get_api_output_in_standard_format
 
 router = APIRouter(
     tags=["authentication"],
 )
 
 
-@router.post("/delete_user/v0")
+@router.post(
+    "/delete_user/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=DeleteUserV0Response,
+)
 @global_object_square_logger.auto_logger()
 async def delete_user_v0(
     access_token: Annotated[str, Header()],
