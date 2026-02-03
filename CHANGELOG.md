@@ -5,9 +5,12 @@
 - models
     - add the following in authentication:
         - DeleteUserV0Response.
+        - UpdateUsernameV0ResponseMain.
+        - UpdateUsernameV0Response.
 - routes
     - add output format validation in the following in authentication:
         - delete_user_v0.
+        - update_username_v0.
 - dependencies
     - update "square_commons>=3.1.0"
 

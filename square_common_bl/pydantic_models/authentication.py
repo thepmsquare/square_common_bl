@@ -27,3 +27,12 @@ class UpdateUserRecoveryMethodsV0(BaseModel):
 
 
 DeleteUserV0Response: TypeAlias = StandardResponse[None]
+
+
+class UpdateUsernameV0ResponseMain(BaseModel):
+    user_id: str
+    username: str
+
+
+class UpdateUsernameV0Response(BaseModel):
+    main: UpdateUsernameV0ResponseMain
