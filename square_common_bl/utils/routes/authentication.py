@@ -48,8 +48,7 @@ def util_delete_user_v0(
         main process
         """
         response = global_object_square_authentication_helper.delete_user_v0(
-            password=body.password,
-            access_token=access_token,
+            password=body.password, access_token=access_token, response_as_pydantic=True
         )
         """
         return value
@@ -57,7 +56,7 @@ def util_delete_user_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -110,6 +109,7 @@ def util_update_username_v0(
         response = global_object_square_authentication_helper.update_username_v0(
             new_username=new_username,
             access_token=access_token,
+            response_as_pydantic=True,
         )
         """
         return value
@@ -117,7 +117,7 @@ def util_update_username_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -167,7 +167,7 @@ def util_get_user_details_v0(
         main process
         """
         response = global_object_square_authentication_helper.get_user_details_v0(
-            access_token=access_token,
+            access_token=access_token, response_as_pydantic=True
         )
         """
         return value
@@ -175,7 +175,7 @@ def util_get_user_details_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -226,12 +226,13 @@ def util_get_user_profile_photo_v0(
         main process
         """
         response = global_object_square_authentication_helper.get_user_details_v0(
-            access_token=access_token,
+            access_token=access_token, response_as_pydantic=True
         )
         # not revalidating access token here
-        user_profile_photo_storage_token = response["data"]["main"]["profile"][
-            "user_profile_photo_storage_token"
-        ]
+
+        user_profile_photo_storage_token = (
+            response.data.main.profile.user_profile_photo_storage_token
+        )
         if not user_profile_photo_storage_token:
             return Response(status_code=status.HTTP_204_NO_CONTENT)
         profile_photo_path = global_object_square_file_store_helper.download_file_v0(
@@ -309,6 +310,7 @@ def util_update_profile_photo_v0(
                         profile_photo.file,
                         profile_photo.content_type,
                     ),
+                    response_as_pydantic=True,
                 )
             )
         else:
@@ -316,6 +318,7 @@ def util_update_profile_photo_v0(
                 global_object_square_authentication_helper.update_profile_photo_v0(
                     access_token=access_token,
                     profile_photo=None,
+                    response_as_pydantic=True,
                 )
             )
 
@@ -324,7 +327,7 @@ def util_update_profile_photo_v0(
         """
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -374,7 +377,7 @@ def util_logout_all_v0(
         main process
         """
         response = global_object_square_authentication_helper.logout_all_v0(
-            access_token=access_token,
+            access_token=access_token, response_as_pydantic=True
         )
         """
         return value
@@ -382,7 +385,7 @@ def util_logout_all_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -456,6 +459,7 @@ def util_logout_apps_v0(
         response = global_object_square_authentication_helper.logout_apps_v0(
             access_token=access_token,
             app_ids=[x[App.app_id.name] for x in local_list_all_apps],
+            response_as_pydantic=True,
         )
         """
         return value
@@ -463,7 +467,7 @@ def util_logout_apps_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -514,7 +518,9 @@ def util_validate_email_verification_code_v0(
         main process
         """
         response = global_object_square_authentication_helper.validate_email_verification_code_v0(
-            access_token=access_token, verification_code=verification_code
+            access_token=access_token,
+            verification_code=verification_code,
+            response_as_pydantic=True,
         )
         """
         return value
@@ -522,7 +528,7 @@ def util_validate_email_verification_code_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -572,7 +578,7 @@ def util_send_verification_email_v0(
         """
         response = (
             global_object_square_authentication_helper.send_verification_email_v0(
-                access_token=access_token,
+                access_token=access_token, response_as_pydantic=True
             )
         )
         """
@@ -581,7 +587,7 @@ def util_send_verification_email_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -641,6 +647,7 @@ def util_update_profile_details_v0(
             email=email,
             phone_number_country_code=phone_number_country_code,
             phone_number=phone_number,
+            response_as_pydantic=True,
         )
         """
         return value
@@ -648,7 +655,7 @@ def util_update_profile_details_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -699,7 +706,7 @@ def util_send_reset_password_email_v0(
         """
         response = (
             global_object_square_authentication_helper.send_reset_password_email_v0(
-                username=username
+                username=username, response_as_pydantic=True
             )
         )
         """
@@ -708,7 +715,7 @@ def util_send_reset_password_email_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -759,7 +766,7 @@ def util_generate_account_backup_codes_v0(
         """
         response = (
             global_object_square_authentication_helper.generate_account_backup_codes_v0(
-                access_token=access_token
+                access_token=access_token, response_as_pydantic=True
             )
         )
         """
@@ -768,7 +775,7 @@ def util_generate_account_backup_codes_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -827,6 +834,7 @@ def util_update_user_recovery_methods_v0(
                 access_token=access_token,
                 recovery_methods_to_add=recovery_methods_to_add,
                 recovery_methods_to_remove=recovery_methods_to_remove,
+                response_as_pydantic=True,
             )
         )
         """
@@ -835,7 +843,7 @@ def util_update_user_recovery_methods_v0(
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -884,7 +892,7 @@ def util_get_user_recovery_methods_v0(username: str):
         """
         response = (
             global_object_square_authentication_helper.get_user_recovery_methods_v0(
-                username=username
+                username=username, response_as_pydantic=True
             )
         )
         """
@@ -893,7 +901,7 @@ def util_get_user_recovery_methods_v0(username: str):
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response,
+            content=response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
