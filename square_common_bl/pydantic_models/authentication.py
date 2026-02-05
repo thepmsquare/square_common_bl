@@ -1,4 +1,4 @@
-from typing import List, TypeAlias
+from typing import List, TypeAlias, Dict
 
 from pydantic import BaseModel
 from square_commons.api_utils import StandardResponse
