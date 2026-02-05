@@ -3,6 +3,7 @@ from typing import Annotated, Optional
 from fastapi import APIRouter, Header, HTTPException, status, UploadFile
 from fastapi.responses import JSONResponse
 from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
 
 from square_common_bl.configuration import (
     global_object_square_logger,
@@ -16,6 +17,7 @@ from square_common_bl.pydantic_models.authentication import (
     UpdateUserRecoveryMethodsV0,
     DeleteUserV0Response,
     UpdateUsernameV0Response,
+    GetUserDetailsV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -70,7 +72,7 @@ async def delete_user_v0(
 @router.patch(
     "/update_username/v0",
     status_code=status.HTTP_200_OK,
-    response_model=UpdateUsernameV0Response,
+    response_model=StandardResponse[UpdateUsernameV0Response],
 )
 @global_object_square_logger.auto_logger()
 async def update_username_v0(
@@ -95,7 +97,11 @@ async def update_username_v0(
         )
 
 
-@router.get("/get_user_details/v0")
+@router.get(
+    "/get_user_details/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[GetUserDetailsV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def get_user_details_v0(
     access_token: Annotated[str, Header()],
