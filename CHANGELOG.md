@@ -13,11 +13,13 @@
         - GetUserDetailsV0ResponseMainBackupCodes.
         - GetUserDetailsV0ResponseMain.
         - GetUserDetailsV0Response.
+        - UpdateProfilePhotoV0Response.
 - routes
     - add output format validation in the following in authentication:
         - delete_user_v0.
         - update_username_v0.
         - get_user_details_v0.
+        - update_profile_photo_v0.
 - dependencies
     - update "square_commons>=3.1.0"
 

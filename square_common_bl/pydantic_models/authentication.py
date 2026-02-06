@@ -78,3 +78,7 @@ class GetUserDetailsV0ResponseMain(BaseModel):
 
 class GetUserDetailsV0Response(BaseModel):
     main: GetUserDetailsV0ResponseMain
+
+
+class UpdateProfilePhotoV0Response(BaseModel):
+    main: str | None

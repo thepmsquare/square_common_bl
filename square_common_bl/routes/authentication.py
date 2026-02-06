@@ -18,6 +18,7 @@ from square_common_bl.pydantic_models.authentication import (
     DeleteUserV0Response,
     UpdateUsernameV0Response,
     GetUserDetailsV0Response,
+    UpdateProfilePhotoV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -145,7 +146,11 @@ async def get_user_profile_photo_v0(
         )
 
 
-@router.patch("/update_profile_photo/v0")
+@router.patch(
+    "/update_profile_photo/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[UpdateProfilePhotoV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def update_profile_photo_v0(
     access_token: Annotated[str, Header()],
