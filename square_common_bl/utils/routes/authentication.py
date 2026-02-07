@@ -31,6 +31,8 @@ from square_common_bl.pydantic_models.authentication import (
     UpdateUsernameV0Response,
     GetUserDetailsV0Response,
     UpdateProfilePhotoV0Response,
+    LogoutAllV0Response,
+    LogoutAppsV0Response,
 )
 
 
@@ -392,13 +394,14 @@ def util_logout_all_v0(
         response = global_object_square_authentication_helper.logout_all_v0(
             access_token=access_token, response_as_pydantic=True
         )
+
         """
         return value
         """
-
+        modified_response = LogoutAllV0Response(response.model_dump())
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response.model_dump(),
+            content=modified_response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)
@@ -477,10 +480,10 @@ def util_logout_apps_v0(
         """
         return value
         """
-
+        modified_response = LogoutAppsV0Response(response.model_dump())
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response.model_dump(),
+            content=modified_response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)

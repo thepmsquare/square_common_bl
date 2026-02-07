@@ -82,3 +82,7 @@ class GetUserDetailsV0Response(BaseModel):
 
 class UpdateProfilePhotoV0Response(BaseModel):
     main: str | None
+
+
+LogoutAppsV0Response: TypeAlias = StandardResponse[None]
+LogoutAllV0Response: TypeAlias = StandardResponse[None]

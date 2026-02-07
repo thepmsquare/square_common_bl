@@ -2,9 +2,6 @@ from typing import Annotated, Optional
 
 from fastapi import APIRouter, Header, HTTPException, status, UploadFile
 from fastapi.responses import JSONResponse
-from square_commons import get_api_output_in_standard_format
-from square_commons.api_utils import StandardResponse
-
 from square_common_bl.configuration import (
     global_object_square_logger,
 )
@@ -19,6 +16,8 @@ from square_common_bl.pydantic_models.authentication import (
     UpdateUsernameV0Response,
     GetUserDetailsV0Response,
     UpdateProfilePhotoV0Response,
+    LogoutAppsV0Response,
+    LogoutAllV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -36,6 +35,8 @@ from square_common_bl.utils.routes.authentication import (
     util_logout_apps_v0,
     util_get_user_recovery_methods_v0,
 )
+from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
 
 router = APIRouter(
     tags=["authentication"],
@@ -174,7 +175,11 @@ async def update_profile_photo_v0(
         )
 
 
-@router.delete("/logout/all/v0")
+@router.delete(
+    "/logout/all/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=LogoutAllV0Response,
+)
 @global_object_square_logger.auto_logger()
 async def logout_all_v0(
     access_token: Annotated[str, Header()],
@@ -196,7 +201,11 @@ async def logout_all_v0(
         )
 
 
-@router.delete("/logout/apps/v0")
+@router.delete(
+    "/logout/apps/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=LogoutAppsV0Response,
+)
 @global_object_square_logger.auto_logger()
 async def logout_apps_v0(
     access_token: Annotated[str, Header()],
