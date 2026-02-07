@@ -7,6 +7,7 @@ from fastapi.background import BackgroundTasks
 from fastapi.responses import JSONResponse, FileResponse, Response
 from requests import HTTPError
 from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
 from square_database_helper import FiltersV0
 from square_database_helper.pydantic_models import FilterConditionsV0
 from square_database_structure.square import global_string_database_name
@@ -118,7 +119,9 @@ def util_update_username_v0(
         """
         return value
         """
-        modified_response = UpdateUsernameV0Response(**response.model_dump())
+        modified_response = StandardResponse[UpdateUsernameV0Response](
+            **response.model_dump()
+        )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content=modified_response.model_dump(),
@@ -173,7 +176,9 @@ def util_get_user_details_v0(
         response = global_object_square_authentication_helper.get_user_details_v0(
             access_token=access_token, response_as_pydantic=True
         )
-        modified_response = GetUserDetailsV0Response(**response.model_dump())
+        modified_response = StandardResponse[GetUserDetailsV0Response](
+            **response.model_dump()
+        )
         """
         return value
         """
@@ -330,7 +335,9 @@ def util_update_profile_photo_v0(
         """
         return value
         """
-        modified_response = UpdateProfilePhotoV0Response(**response.model_dump())
+        modified_response = StandardResponse[UpdateProfilePhotoV0Response](
+            **response.model_dump()
+        )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content=modified_response.model_dump(),
