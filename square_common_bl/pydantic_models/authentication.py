@@ -90,3 +90,8 @@ LogoutAllV0Response: TypeAlias = StandardResponse[None]
 
 class ValidateEmailVerificationCodeV0Response(BaseModel):
     user_profile_email_verified: str
+
+
+class SendVerificationEmailV0Response(BaseModel):
+    expires_at: str
+    cooldown_reset_at: str

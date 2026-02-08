@@ -2,6 +2,9 @@ from typing import Annotated, Optional
 
 from fastapi import APIRouter, Header, HTTPException, status, UploadFile
 from fastapi.responses import JSONResponse
+from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
+
 from square_common_bl.configuration import (
     global_object_square_logger,
 )
@@ -19,6 +22,7 @@ from square_common_bl.pydantic_models.authentication import (
     LogoutAppsV0Response,
     LogoutAllV0Response,
     ValidateEmailVerificationCodeV0Response,
+    SendVerificationEmailV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -36,8 +40,6 @@ from square_common_bl.utils.routes.authentication import (
     util_logout_apps_v0,
     util_get_user_recovery_methods_v0,
 )
-from square_commons import get_api_output_in_standard_format
-from square_commons.api_utils import StandardResponse
 
 router = APIRouter(
     tags=["authentication"],
@@ -259,7 +261,11 @@ async def validate_email_verification_code_v0(
         )
 
 
-@router.post("/send_verification_email/v0")
+@router.post(
+    "/send_verification_email/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[SendVerificationEmailV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def send_verification_email_v0(
     access_token: Annotated[str, Header()],
