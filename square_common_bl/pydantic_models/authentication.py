@@ -86,3 +86,7 @@ class UpdateProfilePhotoV0Response(BaseModel):
 
 LogoutAppsV0Response: TypeAlias = StandardResponse[None]
 LogoutAllV0Response: TypeAlias = StandardResponse[None]
+
+
+class ValidateEmailVerificationCodeV0Response(BaseModel):
+    user_profile_email_verified: str

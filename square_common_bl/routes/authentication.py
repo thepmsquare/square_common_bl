@@ -18,6 +18,7 @@ from square_common_bl.pydantic_models.authentication import (
     UpdateProfilePhotoV0Response,
     LogoutAppsV0Response,
     LogoutAllV0Response,
+    ValidateEmailVerificationCodeV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -230,7 +231,11 @@ async def logout_apps_v0(
         )
 
 
-@router.post("/validate_email_verification_code/v0")
+@router.post(
+    "/validate_email_verification_code/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[ValidateEmailVerificationCodeV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def validate_email_verification_code_v0(
     access_token: Annotated[str, Header()],
