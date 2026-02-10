@@ -35,6 +35,7 @@ from square_common_bl.pydantic_models.authentication import (
     LogoutAppsV0Response,
     ValidateEmailVerificationCodeV0Response,
     SendVerificationEmailV0Response,
+    UpdateProfileDetailsV0Response,
 )
 
 
@@ -674,10 +675,12 @@ def util_update_profile_details_v0(
         """
         return value
         """
-
+        modified_response = StandardResponse[UpdateProfileDetailsV0Response](
+            **response.model_dump()
+        )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response.model_dump(),
+            content=modified_response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)

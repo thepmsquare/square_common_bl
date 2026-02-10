@@ -23,6 +23,7 @@ from square_common_bl.pydantic_models.authentication import (
     LogoutAllV0Response,
     ValidateEmailVerificationCodeV0Response,
     SendVerificationEmailV0Response,
+    UpdateProfileDetailsV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -287,7 +288,11 @@ async def send_verification_email_v0(
         )
 
 
-@router.patch("/update_profile_details/v0")
+@router.patch(
+    "/update_profile_details/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[UpdateProfileDetailsV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def update_profile_details_v0(
     access_token: Annotated[str, Header()],
