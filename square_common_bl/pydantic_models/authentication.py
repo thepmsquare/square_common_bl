@@ -112,3 +112,8 @@ class UpdateProfileDetailsV0ResponseMain(BaseModel):
 class UpdateProfileDetailsV0Response(BaseModel):
     main: list[UpdateProfileDetailsV0ResponseMain]
     affected_count: int
+
+
+class SendResetPasswordEmailV0Response(BaseModel):
+    expires_at: str
+    cooldown_reset_at: str

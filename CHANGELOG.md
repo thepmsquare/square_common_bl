@@ -20,6 +20,7 @@
         - SendVerificationEmailV0Response.
         - UpdateProfileDetailsV0ResponseMain.
         - UpdateProfileDetailsV0Response.
+        - SendResetPasswordEmailV0Response.
 - routes
     - add output format validation in the following in authentication:
         - delete_user_v0.
@@ -31,6 +32,7 @@
         - validate_email_verification_code_v0.
         - send_verification_email_v0.
         - update_profile_details_v0.
+        - send_reset_password_email_v0.
 - dependencies
     - update "square_commons>=3.1.0"
 
