@@ -117,3 +117,12 @@ class UpdateProfileDetailsV0Response(BaseModel):
 class SendResetPasswordEmailV0Response(BaseModel):
     expires_at: str
     cooldown_reset_at: str
+
+
+class GenerateAccountBackupCodesV0ResponseMain(BaseModel):
+    user_id: str
+    backup_codes: List[str]
+
+
+class GenerateAccountBackupCodesV0Response(BaseModel):
+    main: GenerateAccountBackupCodesV0ResponseMain

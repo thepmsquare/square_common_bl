@@ -22,6 +22,7 @@ from square_common_bl.pydantic_models.authentication import (
     SendVerificationEmailV0Response,
     UpdateProfileDetailsV0Response,
     SendResetPasswordEmailV0Response,
+    GenerateAccountBackupCodesV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -351,7 +352,11 @@ async def send_reset_password_email_v0(
         )
 
 
-@router.post("/generate_account_backup_codes/v0")
+@router.post(
+    "/generate_account_backup_codes/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[GenerateAccountBackupCodesV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def generate_account_backup_codes_v0(
     access_token: Annotated[str, Header()],
