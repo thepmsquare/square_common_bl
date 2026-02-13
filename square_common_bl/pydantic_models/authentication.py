@@ -126,3 +126,7 @@ class GenerateAccountBackupCodesV0ResponseMain(BaseModel):
 
 class GenerateAccountBackupCodesV0Response(BaseModel):
     main: GenerateAccountBackupCodesV0ResponseMain
+
+
+class UpdateUserRecoveryMethodsV0Response(BaseModel):
+    main: List[str]

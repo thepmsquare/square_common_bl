@@ -22,6 +22,7 @@
         - UpdateProfileDetailsV0Response.
         - SendResetPasswordEmailV0Response.
         - GenerateAccountBackupCodesV0Response.
+        - UpdateUserRecoveryMethodsV0Response.
 - routes
     - add output format validation in the following in authentication:
         - delete_user_v0.
@@ -35,6 +36,7 @@
         - update_profile_details_v0.
         - send_reset_password_email_v0.
         - generate_account_backup_codes_v0.
+        - update_user_recovery_methods_v0.
 - dependencies
     - update "square_commons>=3.1.0"
 
