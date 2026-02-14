@@ -30,6 +30,7 @@ from square_common_bl.pydantic_models.authentication import (
     SendResetPasswordEmailV0Response,
     GenerateAccountBackupCodesV0Response,
     UpdateUserRecoveryMethodsV0Response,
+    GetUserRecoveryMethodsV0Response,
 )
 from square_commons import get_api_output_in_standard_format
 from square_commons.api_utils import StandardResponse
@@ -931,10 +932,12 @@ def util_get_user_recovery_methods_v0(username: str):
         """
         return value
         """
-
+        modified_response = StandardResponse[GetUserRecoveryMethodsV0Response](
+            **response.model_dump()
+        )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response.model_dump(),
+            content=modified_response.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)

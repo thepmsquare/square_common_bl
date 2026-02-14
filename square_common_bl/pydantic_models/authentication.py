@@ -130,3 +130,7 @@ class GenerateAccountBackupCodesV0Response(BaseModel):
 
 class UpdateUserRecoveryMethodsV0Response(BaseModel):
     main: List[str]
+
+
+class GetUserRecoveryMethodsV0Response(BaseModel):
+    main: Dict[str, bool]
