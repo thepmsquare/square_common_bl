@@ -39,6 +39,7 @@
         - generate_account_backup_codes_v0.
         - update_user_recovery_methods_v0.
         - get_user_recovery_methods_v0.
+        - get_user_profile_photo_v0.
 - dependencies
     - update "square_commons>=3.1.0"
 

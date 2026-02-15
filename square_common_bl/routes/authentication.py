@@ -1,7 +1,10 @@
 from typing import Annotated, Optional
 
 from fastapi import APIRouter, Header, HTTPException, status, UploadFile
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
+
 from square_common_bl.configuration import (
     global_object_square_logger,
 )
@@ -42,8 +45,6 @@ from square_common_bl.utils.routes.authentication import (
     util_logout_apps_v0,
     util_get_user_recovery_methods_v0,
 )
-from square_commons import get_api_output_in_standard_format
-from square_commons.api_utils import StandardResponse
 
 router = APIRouter(
     tags=["authentication"],
@@ -132,7 +133,11 @@ async def get_user_details_v0(
         )
 
 
-@router.get("/get_user_profile_photo/v0")
+@router.get(
+    "/get_user_profile_photo/v0",
+    status_code=status.HTTP_200_OK,
+    response_class=FileResponse,
+)
 @global_object_square_logger.auto_logger()
 async def get_user_profile_photo_v0(
     access_token: Annotated[str, Header()],
