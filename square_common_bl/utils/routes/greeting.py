@@ -3,11 +3,6 @@ import json
 from fastapi import status, HTTPException
 from fastapi.responses import JSONResponse
 from requests import HTTPError
-from square_commons import get_api_output_in_standard_format
-from square_database_structure.square import global_string_database_name
-from square_database_structure.square.greeting import global_string_schema_name
-from square_database_structure.square.greeting.tables import Greeting
-
 from square_common_bl.configuration import (
     global_object_square_logger,
     global_object_square_database_helper,
@@ -15,7 +10,13 @@ from square_common_bl.configuration import (
 from square_common_bl.messages import messages
 from square_common_bl.pydantic_models.greeting import (
     CreateAnonymousGreetingV0,
+    CreateAnonymousGreetingV0Response,
 )
+from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
+from square_database_structure.square import global_string_database_name
+from square_database_structure.square.greeting import global_string_schema_name
+from square_database_structure.square.greeting.tables import Greeting
 
 
 @global_object_square_logger.auto_logger()
@@ -50,14 +51,17 @@ def util_create_anonymous_greeting_v0(body: CreateAnonymousGreetingV0):
         """
         return value
         """
-
+        modified_response = StandardResponse[CreateAnonymousGreetingV0Response](
+            **local_list.data.main.model_dump()
+        )
         output_content = get_api_output_in_standard_format(
             message=messages["GENERIC_CREATION_SUCCESSFUL"],
-            data={"main": local_list.data.main},
+            data=modified_response.model_dump(),
+            as_dict=False,
         )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=output_content,
+            content=output_content.model_dump(),
         )
     except HTTPError as http_error:
         global_object_square_logger.logger.error(http_error, exc_info=True)

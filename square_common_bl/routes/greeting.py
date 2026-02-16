@@ -1,22 +1,27 @@
 from fastapi import APIRouter, status, HTTPException
 from fastapi.responses import JSONResponse
-from square_commons import get_api_output_in_standard_format
-
 from square_common_bl.configuration import (
     global_object_square_logger,
 )
 from square_common_bl.messages import messages
 from square_common_bl.pydantic_models.greeting import (
     CreateAnonymousGreetingV0,
+    CreateAnonymousGreetingV0Response,
 )
 from square_common_bl.utils.routes.greeting import util_create_anonymous_greeting_v0
+from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
 
 router = APIRouter(
     tags=["greeting"],
 )
 
 
-@router.post("/create_anonymous_greeting/v0")
+@router.post(
+    "/create_anonymous_greeting/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[CreateAnonymousGreetingV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def create_anonymous_greeting_v0(body: CreateAnonymousGreetingV0):
     try:
