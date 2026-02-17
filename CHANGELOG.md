@@ -1,6 +1,6 @@
 # changelog
 
-## v6.1.0 (in progress)
+## v6.1.0
 
 - models
     - add the following in authentication:
@@ -27,6 +27,8 @@
     - add the following in greeting:
         - CreateAnonymousGreetingV0Response.
         - CreateAnonymousGreetingV0ResponseMain.
+    - add the following in internal:
+        - GetAppIdV0Response.
 - routes
     - add output format validation in the following in authentication:
         - delete_user_v0.
@@ -45,6 +47,8 @@
         - get_user_profile_photo_v0.
     - add output format validation in the following in authentication:
         - create_anonymous_greeting_v0.
+    - add output format validation in the following in internal:
+        - get_app_id_v0.
 - dependencies
     - update "square_commons>=3.1.0"
 

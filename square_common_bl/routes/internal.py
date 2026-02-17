@@ -1,11 +1,13 @@
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 from square_commons import get_api_output_in_standard_format
+from square_commons.api_utils import StandardResponse
 
 from square_common_bl.configuration import (
     global_object_square_logger,
 )
 from square_common_bl.messages import messages
+from square_common_bl.pydantic_models.internal import GetAppIdV0Response
 from square_common_bl.utils.routes.internal import util_get_app_id_v0
 
 router = APIRouter(
@@ -13,7 +15,11 @@ router = APIRouter(
 )
 
 
-@router.get("/get_app_id/v0")
+@router.get(
+    "/get_app_id/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[GetAppIdV0Response],
+)
 @global_object_square_logger.auto_logger()
 async def get_app_id_v0(app_name: str):
     try:

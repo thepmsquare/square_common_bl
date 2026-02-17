@@ -11,6 +11,7 @@ from square_common_bl.configuration import (
     global_object_square_database_helper,
 )
 from square_common_bl.messages import messages
+from square_common_bl.pydantic_models.internal import GetAppIdV0Response
 
 
 @global_object_square_logger.auto_logger()
@@ -47,14 +48,15 @@ def util_get_app_id_v0(app_name: str):
         """
         return value
         """
-
+        data = GetAppIdV0Response(main=local_list[0][App.app_id.name])
         output_content = get_api_output_in_standard_format(
             message=messages["GENERIC_READ_SUCCESSFUL"],
-            data={"main": local_list[0][App.app_id.name]},
+            data=data.model_dump(),
+            as_dict=False,
         )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=output_content,
+            content=output_content.model_dump(),
         )
     except HTTPException as http_exception:
         global_object_square_logger.logger.error(http_exception, exc_info=True)
