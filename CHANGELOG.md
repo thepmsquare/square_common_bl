@@ -1,5 +1,11 @@
 # changelog
 
+## v6.1.1
+
+- bugfix in logout_all_v0, logout_apps_v0.
+- dependencies
+    - update "square_authentication_helper>=3.3.1"
+
 ## v6.1.0
 
 - models

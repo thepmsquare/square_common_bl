@@ -404,7 +404,7 @@ def util_logout_all_v0(
         """
         return value
         """
-        modified_response = LogoutAllV0Response(response.model_dump())
+        modified_response = LogoutAllV0Response(**response.model_dump())
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content=modified_response.model_dump(),
@@ -486,7 +486,7 @@ def util_logout_apps_v0(
         """
         return value
         """
-        modified_response = LogoutAppsV0Response(response.model_dump())
+        modified_response = LogoutAppsV0Response(**response.model_dump())
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content=modified_response.model_dump(),
