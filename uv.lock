@@ -545,20 +545,20 @@ wheels = [
 
 [[package]]
 name = "square-authentication-helper"
-version = "3.3.1"
+version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "square-commons" },
     { name = "square-database-structure" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/38/3a/d93cd03ec1ed989265ccd9dfedfc66e9d1194a736b4f72575921170f9496/square_authentication_helper-3.3.1.tar.gz", hash = "sha256:8c217e6dce9cc40fd060caef6044c26744b58a55d1d547679b4f39752aa90ba8", size = 4590, upload-time = "2026-02-21T18:52:16.585Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0c/41/35843a60384102bc0b22064e8609e6081adae69fcdac44f5e1f541bc78af/square_authentication_helper-4.0.0.tar.gz", hash = "sha256:06df307d778175fc7c7365153763e8edf0ca0651a1b0f34105d4b55c1c3c3904", size = 4574, upload-time = "2026-02-23T01:27:53.307Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ae/39/68e1dace469f0eb5455ca80da622d5ef5ba2d6ce6d6cfcdf2e17e5283ca0/square_authentication_helper-3.3.1-py3-none-any.whl", hash = "sha256:8c8d9d0fa0f8379babc1cff79c0e6a3ceddb61d6690aa029fe21927f64f0103f", size = 6018, upload-time = "2026-02-21T18:52:15.719Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/82/c6e5c70d940c9bc8f39f2ddc5682155837c37f058dff37c8708af8e22836/square_authentication_helper-4.0.0-py3-none-any.whl", hash = "sha256:0ac4371a42e0def350bc66cbedf6d4bd56f4cb32286b2904aba431ab85585e49", size = 6000, upload-time = "2026-02-23T01:27:54.003Z" },
 ]
 
 [[package]]
 name = "square-common-bl"
-version = "6.1.1"
+version = "7.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "black" },
@@ -594,7 +594,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.3" },
     { name = "python-multipart", specifier = ">=0.0.16" },
     { name = "requests", specifier = ">=2.32.3" },
-    { name = "square-authentication-helper", specifier = ">=3.3.1" },
+    { name = "square-authentication-helper", specifier = ">=4.0.0" },
     { name = "square-commons", specifier = ">=3.1.0" },
     { name = "square-database-helper", specifier = ">=2.7.1" },
     { name = "square-database-structure", specifier = ">=1.0.0" },

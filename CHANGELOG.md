@@ -1,5 +1,11 @@
 # changelog
 
+## v7.0.0
+
+- **breaking change**: update UpdateProfileDetailsV0Response.
+- dependencies
+    - update "square_authentication_helper>=4.0.0"
+
 ## v6.1.1
 
 - bugfix in logout_all_v0, logout_apps_v0.
