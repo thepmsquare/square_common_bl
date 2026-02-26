@@ -1,5 +1,11 @@
 # changelog
 
+## v7.0.1
+
+- bugfix in create_anonymous_greeting_v0.
+- dependencies
+    - update "square_authentication_helper>=4.0.0"
+
 ## v7.0.0
 
 - **breaking change**: update UpdateProfileDetailsV0Response.
