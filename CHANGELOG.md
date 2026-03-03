@@ -1,5 +1,11 @@
 # changelog
 
+## v7.1.0
+
+- update GetUserRecoveryMethodsV0Response.
+- dependencies
+    - update "square_authentication_helper>=4.1.0"
+
 ## v7.0.1
 
 - bugfix in create_anonymous_greeting_v0.
