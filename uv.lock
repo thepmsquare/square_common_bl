@@ -546,30 +546,19 @@ wheels = [
 [[package]]
 name = "square-authentication-helper"
 version = "4.2.0"
-source = { directory = "../square_authentication_helper" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "square-commons" },
     { name = "square-database-structure" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "black", marker = "extra == 'all'", specifier = ">=25.12.0" },
-    { name = "black", marker = "extra == 'dev'", specifier = ">=25.12.0" },
-    { name = "pytest", marker = "extra == 'all'", specifier = ">=9.0.2" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0.2" },
-    { name = "pytest-cov", marker = "extra == 'all'", specifier = ">=7.0.0" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=7.0.0" },
-    { name = "pytest-mock", marker = "extra == 'all'", specifier = ">=3.15.1" },
-    { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.15.1" },
-    { name = "square-commons", specifier = ">=3.1.0" },
-    { name = "square-database-structure", specifier = ">=2.5.7" },
+sdist = { url = "https://files.pythonhosted.org/packages/42/8e/46d4b8c567bf4fde37c224937ab7da216dd9489f4cfc2a05351e8f4ca301/square_authentication_helper-4.2.0.tar.gz", hash = "sha256:c4321d76f712604cd7e3323a51bbce74ace32b3ad14dbf144bba43fc7c2b5490", size = 4617, upload-time = "2026-03-21T05:55:48.873Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e5/21/d53cc423940fe18473e663cbf5fcb86b6649f1e10c99b5820ef0fac90f15/square_authentication_helper-4.2.0-py3-none-any.whl", hash = "sha256:0193c2f717567797c12ca5bc63dbda44ab3b75ade35dab08f124b5166f35b685", size = 6045, upload-time = "2026-03-21T05:55:49.944Z" },
 ]
-provides-extras = ["all", "dev"]
 
 [[package]]
 name = "square-common-bl"
-version = "7.2.0"
+version = "7.2.1"
 source = { editable = "." }
 dependencies = [
     { name = "black" },
@@ -605,7 +594,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.3" },
     { name = "python-multipart", specifier = ">=0.0.16" },
     { name = "requests", specifier = ">=2.32.3" },
-    { name = "square-authentication-helper", directory = "../square_authentication_helper" },
+    { name = "square-authentication-helper", specifier = ">=4.2.0" },
     { name = "square-commons", specifier = ">=3.1.0" },
     { name = "square-database-helper", specifier = ">=2.7.1" },
     { name = "square-database-structure", specifier = ">=1.0.0" },

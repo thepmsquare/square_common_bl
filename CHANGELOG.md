@@ -1,11 +1,14 @@
 # changelog
- 
-## v7.2.0
- 
+
+## v7.2.1
+
+- fix uv lock file
+
+## v7.2.0 (unstable)
+
 - update `GetUserDetailsV0ResponseMain` to include `auth_providers`.
 - dependencies
     - update `square_authentication_helper>=4.2.0`.
- 
 
 ## v7.1.0
 
