@@ -545,20 +545,31 @@ wheels = [
 
 [[package]]
 name = "square-authentication-helper"
-version = "4.1.0"
-source = { registry = "https://pypi.org/simple" }
+version = "4.2.0"
+source = { directory = "../square_authentication_helper" }
 dependencies = [
     { name = "square-commons" },
     { name = "square-database-structure" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7c/8f/2a4ba97d978ca2efa55f4358aea3db6af505563aac831f6d35e71de101ee/square_authentication_helper-4.1.0.tar.gz", hash = "sha256:1d090dd91024d42569c81d77e89cd5575dc1171272e946fb5eb346ae2e9037f8", size = 4603, upload-time = "2026-03-03T07:27:17.193Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/9d/97/b42fd502f7bb714093d00c45f68bd5662b9af25da08e18b8419c16e4ca5c/square_authentication_helper-4.1.0-py3-none-any.whl", hash = "sha256:80bebaaa98f09f9cdaeafcf27658dd8dd35f1f6a60beea7c5f63ee0f0d97b1f1", size = 6032, upload-time = "2026-03-03T07:27:18.169Z" },
+
+[package.metadata]
+requires-dist = [
+    { name = "black", marker = "extra == 'all'", specifier = ">=25.12.0" },
+    { name = "black", marker = "extra == 'dev'", specifier = ">=25.12.0" },
+    { name = "pytest", marker = "extra == 'all'", specifier = ">=9.0.2" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0.2" },
+    { name = "pytest-cov", marker = "extra == 'all'", specifier = ">=7.0.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=7.0.0" },
+    { name = "pytest-mock", marker = "extra == 'all'", specifier = ">=3.15.1" },
+    { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.15.1" },
+    { name = "square-commons", specifier = ">=3.1.0" },
+    { name = "square-database-structure", specifier = ">=2.5.7" },
 ]
+provides-extras = ["all", "dev"]
 
 [[package]]
 name = "square-common-bl"
-version = "7.1.0"
+version = "7.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "black" },
@@ -594,7 +605,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.3" },
     { name = "python-multipart", specifier = ">=0.0.16" },
     { name = "requests", specifier = ">=2.32.3" },
-    { name = "square-authentication-helper", specifier = ">=4.1.0" },
+    { name = "square-authentication-helper", directory = "../square_authentication_helper" },
     { name = "square-commons", specifier = ">=3.1.0" },
     { name = "square-database-helper", specifier = ">=2.7.1" },
     { name = "square-database-structure", specifier = ">=1.0.0" },
