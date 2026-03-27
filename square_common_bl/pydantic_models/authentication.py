@@ -19,6 +19,23 @@ class ValidateEmailVerificationCodeV0(BaseModel):
 
 class SendResetPasswordEmailV0(BaseModel):
     username: str
+    redirect_url: str = None
+
+
+class SendVerificationEmailV0(BaseModel):
+    redirect_url: str = None
+
+
+class AddSelfAuthProviderV0(BaseModel):
+    password: str
+
+
+class AddGoogleAuthProviderV0(BaseModel):
+    google_id_token: str
+
+
+class UnlinkAuthProviderV0(BaseModel):
+    auth_provider: str
 
 
 class UpdateUserRecoveryMethodsV0(BaseModel):
@@ -129,6 +146,18 @@ class GenerateAccountBackupCodesV0Response(BaseModel):
 
 
 class UpdateUserRecoveryMethodsV0Response(BaseModel):
+    main: List[str]
+
+
+class AddSelfAuthProviderV0Response(BaseModel):
+    main: List[str]
+
+
+class AddGoogleAuthProviderV0Response(BaseModel):
+    main: List[str]
+
+
+class UnlinkAuthProviderV0Response(BaseModel):
     main: List[str]
 
 

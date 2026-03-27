@@ -18,6 +18,10 @@ from square_common_bl.pydantic_models.authentication import (
     LogoutAppsV0,
     ValidateEmailVerificationCodeV0,
     SendResetPasswordEmailV0,
+    SendVerificationEmailV0,
+    AddSelfAuthProviderV0,
+    AddGoogleAuthProviderV0,
+    UnlinkAuthProviderV0,
     DeleteUserV0Response,
     UpdateUsernameV0Response,
     GetUserDetailsV0Response,
@@ -31,6 +35,9 @@ from square_common_bl.pydantic_models.authentication import (
     GenerateAccountBackupCodesV0Response,
     UpdateUserRecoveryMethodsV0Response,
     GetUserRecoveryMethodsV0Response,
+    AddSelfAuthProviderV0Response,
+    AddGoogleAuthProviderV0Response,
+    UnlinkAuthProviderV0Response,
 )
 from square_commons import get_api_output_in_standard_format
 from square_commons.api_utils import StandardResponse
@@ -591,7 +598,9 @@ def util_validate_email_verification_code_v0(
 @global_object_square_logger.auto_logger()
 def util_send_verification_email_v0(
     access_token: Annotated[str, Header()],
+    body: SendVerificationEmailV0,
 ):
+    redirect_url = body.redirect_url
     try:
         """
         validation
@@ -600,10 +609,10 @@ def util_send_verification_email_v0(
         """
         main process
         """
-        response = (
-            global_object_square_authentication_helper.send_verification_email_v0(
-                access_token=access_token, response_as_pydantic=True
-            )
+        response = global_object_square_authentication_helper.send_verification_email_v0(
+            access_token=access_token,
+            redirect_url=redirect_url,
+            response_as_pydantic=True,
         )
         """
         return value
@@ -732,10 +741,10 @@ def util_send_reset_password_email_v0(
         """
         main process
         """
-        response = (
-            global_object_square_authentication_helper.send_reset_password_email_v0(
-                username=username, response_as_pydantic=True
-            )
+        response = global_object_square_authentication_helper.send_reset_password_email_v0(
+            username=username,
+            redirect_url=body.redirect_url,
+            response_as_pydantic=True,
         )
         """
         return value
@@ -964,6 +973,161 @@ def util_get_user_recovery_methods_v0(username: str):
         rollback logic
         """
         # pass
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"],
+            log=str(e),
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@global_object_square_logger.auto_logger()
+def util_add_self_auth_provider_v0(
+    access_token: Annotated[str, Header()],
+    body: AddSelfAuthProviderV0,
+):
+
+    try:
+        """
+        validation
+        """
+        # pass
+        """
+        main process
+        """
+        response = global_object_square_authentication_helper.add_self_auth_provider_v0(
+            access_token=access_token,
+            password=body.password,
+            response_as_pydantic=True,
+        )
+        """
+        return value
+        """
+        modified_response = StandardResponse[AddSelfAuthProviderV0Response](
+            **response.model_dump()
+        )
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content=modified_response.model_dump(),
+        )
+    except HTTPError as http_error:
+        global_object_square_logger.logger.error(http_error, exc_info=True)
+        return JSONResponse(
+            status_code=http_error.response.status_code,
+            content=json.loads(http_error.response.content),
+        )
+    except HTTPException as http_exception:
+        global_object_square_logger.logger.error(http_exception, exc_info=True)
+        return JSONResponse(
+            status_code=http_exception.status_code, content=http_exception.detail
+        )
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"],
+            log=str(e),
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@global_object_square_logger.auto_logger()
+def util_add_google_auth_provider_v0(
+    access_token: Annotated[str, Header()],
+    body: AddGoogleAuthProviderV0,
+):
+
+    try:
+        """
+        validation
+        """
+        # pass
+        """
+        main process
+        """
+        response = (
+            global_object_square_authentication_helper.add_google_auth_provider_v0(
+                access_token=access_token,
+                google_id_token=body.google_id_token,
+                response_as_pydantic=True,
+            )
+        )
+        """
+        return value
+        """
+        modified_response = StandardResponse[AddGoogleAuthProviderV0Response](
+            **response.model_dump()
+        )
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content=modified_response.model_dump(),
+        )
+    except HTTPError as http_error:
+        global_object_square_logger.logger.error(http_error, exc_info=True)
+        return JSONResponse(
+            status_code=http_error.response.status_code,
+            content=json.loads(http_error.response.content),
+        )
+    except HTTPException as http_exception:
+        global_object_square_logger.logger.error(http_exception, exc_info=True)
+        return JSONResponse(
+            status_code=http_exception.status_code, content=http_exception.detail
+        )
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"],
+            log=str(e),
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@global_object_square_logger.auto_logger()
+def util_unlink_auth_provider_v0(
+    access_token: Annotated[str, Header()],
+    body: UnlinkAuthProviderV0,
+):
+
+    try:
+        """
+        validation
+        """
+        # pass
+        """
+        main process
+        """
+        response = global_object_square_authentication_helper.unlink_auth_provider_v0(
+            access_token=access_token,
+            auth_provider=body.auth_provider,
+            response_as_pydantic=True,
+        )
+        """
+        return value
+        """
+        modified_response = StandardResponse[UnlinkAuthProviderV0Response](
+            **response.model_dump()
+        )
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content=modified_response.model_dump(),
+        )
+    except HTTPError as http_error:
+        global_object_square_logger.logger.error(http_error, exc_info=True)
+        return JSONResponse(
+            status_code=http_error.response.status_code,
+            content=json.loads(http_error.response.content),
+        )
+    except HTTPException as http_exception:
+        global_object_square_logger.logger.error(http_exception, exc_info=True)
+        return JSONResponse(
+            status_code=http_exception.status_code, content=http_exception.detail
+        )
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
         output_content = get_api_output_in_standard_format(
             message=messages["GENERIC_500"],
             log=str(e),

@@ -14,6 +14,10 @@ from square_common_bl.pydantic_models.authentication import (
     LogoutAppsV0,
     ValidateEmailVerificationCodeV0,
     SendResetPasswordEmailV0,
+    SendVerificationEmailV0,
+    AddSelfAuthProviderV0,
+    AddGoogleAuthProviderV0,
+    UnlinkAuthProviderV0,
     UpdateUserRecoveryMethodsV0,
     DeleteUserV0Response,
     UpdateUsernameV0Response,
@@ -28,6 +32,9 @@ from square_common_bl.pydantic_models.authentication import (
     GenerateAccountBackupCodesV0Response,
     UpdateUserRecoveryMethodsV0Response,
     GetUserRecoveryMethodsV0Response,
+    AddSelfAuthProviderV0Response,
+    AddGoogleAuthProviderV0Response,
+    UnlinkAuthProviderV0Response,
 )
 from square_common_bl.utils.routes.authentication import (
     util_delete_user_v0,
@@ -44,6 +51,9 @@ from square_common_bl.utils.routes.authentication import (
     util_update_user_recovery_methods_v0,
     util_logout_apps_v0,
     util_get_user_recovery_methods_v0,
+    util_add_self_auth_provider_v0,
+    util_add_google_auth_provider_v0,
+    util_unlink_auth_provider_v0,
 )
 
 router = APIRouter(
@@ -278,10 +288,12 @@ async def validate_email_verification_code_v0(
 @global_object_square_logger.auto_logger()
 async def send_verification_email_v0(
     access_token: Annotated[str, Header()],
+    body: SendVerificationEmailV0,
 ):
     try:
         return util_send_verification_email_v0(
             access_token=access_token,
+            body=body,
         )
     except HTTPException as he:
         global_object_square_logger.logger.error(he, exc_info=True)
@@ -429,6 +441,90 @@ async def get_user_recovery_methods_v0(
     try:
         return util_get_user_recovery_methods_v0(
             username=username,
+        )
+    except HTTPException as he:
+        global_object_square_logger.logger.error(he, exc_info=True)
+        return JSONResponse(status_code=he.status_code, content=he.detail)
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"], log=str(e)
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@router.post(
+    "/add_self_auth_provider/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[AddSelfAuthProviderV0Response],
+)
+@global_object_square_logger.auto_logger()
+async def add_self_auth_provider_v0(
+    access_token: Annotated[str, Header()],
+    body: AddSelfAuthProviderV0,
+):
+    try:
+        return util_add_self_auth_provider_v0(
+            access_token=access_token,
+            body=body,
+        )
+    except HTTPException as he:
+        global_object_square_logger.logger.error(he, exc_info=True)
+        return JSONResponse(status_code=he.status_code, content=he.detail)
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"], log=str(e)
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@router.post(
+    "/add_google_auth_provider/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[AddGoogleAuthProviderV0Response],
+)
+@global_object_square_logger.auto_logger()
+async def add_google_auth_provider_v0(
+    access_token: Annotated[str, Header()],
+    body: AddGoogleAuthProviderV0,
+):
+    try:
+        return util_add_google_auth_provider_v0(
+            access_token=access_token,
+            body=body,
+        )
+    except HTTPException as he:
+        global_object_square_logger.logger.error(he, exc_info=True)
+        return JSONResponse(status_code=he.status_code, content=he.detail)
+    except Exception as e:
+        global_object_square_logger.logger.error(e, exc_info=True)
+        output_content = get_api_output_in_standard_format(
+            message=messages["GENERIC_500"], log=str(e)
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=output_content
+        )
+
+
+@router.post(
+    "/unlink_auth_provider/v0",
+    status_code=status.HTTP_200_OK,
+    response_model=StandardResponse[UnlinkAuthProviderV0Response],
+)
+@global_object_square_logger.auto_logger()
+async def unlink_auth_provider_v0(
+    access_token: Annotated[str, Header()],
+    body: UnlinkAuthProviderV0,
+):
+    try:
+        return util_unlink_auth_provider_v0(
+            access_token=access_token,
+            body=body,
         )
     except HTTPException as he:
         global_object_square_logger.logger.error(he, exc_info=True)
