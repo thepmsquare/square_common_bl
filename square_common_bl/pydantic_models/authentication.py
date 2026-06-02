@@ -149,8 +149,11 @@ class UpdateUserRecoveryMethodsV0Response(BaseModel):
     main: List[str]
 
 
+class AddSelfAuthProviderV0ResponseMain(BaseModel):
+    auth_providers: List[str]
+
 class AddSelfAuthProviderV0Response(BaseModel):
-    main: List[str]
+    main: AddSelfAuthProviderV0ResponseMain
 
 
 class AddGoogleAuthProviderV0Response(BaseModel):
