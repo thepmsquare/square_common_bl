@@ -1,5 +1,9 @@
 # changelog
 
+## v7.3.1
+
+- update type AddSelfAuthProviderV0Response.
+
 ## v7.3.0
 
 - add `add_self_auth_provider_v0`, `add_google_auth_provider_v0`, `unlink_auth_provider_v0`.
