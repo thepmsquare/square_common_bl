@@ -8,3 +8,6 @@ def test_read_main(get_patched_configuration, create_client_and_cleanup):
     assert response.json() == get_api_output_in_standard_format(
         log=get_patched_configuration.config_str_module_name
     )
+    
+def test_module_imports():
+    import square_common_bl
