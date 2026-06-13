@@ -18,7 +18,7 @@ from square_common_bl.configuration import (
 )
 from square_common_bl.routes import greeting, internal, authentication
 
-app = FastAPI(name=config_str_module_name, version=version(config_str_module_name))
+app = FastAPI(title=config_str_module_name, version=version(config_str_module_name))
 
 app.add_middleware(
     CORSMiddleware,
