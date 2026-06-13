@@ -1,5 +1,9 @@
 # changelog
 
+## v7.3.2
+
+- update app title and version in fastapi.
+
 ## v7.3.1
 
 - update type AddSelfAuthProviderV0Response.
